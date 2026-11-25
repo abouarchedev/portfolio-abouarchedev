@@ -1,3 +1,4 @@
+
 import {
   Award,
   FileText,
@@ -5,7 +6,6 @@ import {
   CalendarDays,
   GraduationCap,
   Code2,
-  Download,
   ExternalLink,
 } from 'lucide-react'
 
@@ -21,7 +21,6 @@ function Certifications({ language }) {
       completion: 'Certificat de formation',
       verify: 'Vérifier le certificat',
       view: 'Consulter le certificat',
-      download: 'Télécharger le PDF',
       dateUnknown: 'Date non précisée',
       preview: 'Aperçu du certificat',
       items: [
@@ -136,7 +135,6 @@ function Certifications({ language }) {
       completion: 'Certificate of completion',
       verify: 'Verify certificate',
       view: 'View certificate',
-      download: 'Download PDF',
       dateUnknown: 'Date not specified',
       preview: 'Certificate preview',
       items: [
@@ -281,7 +279,7 @@ function Certifications({ language }) {
           {text.items.map((item, index) => {
             const CertificateIcon = item.icon
 
-            // Convert the PDF filename to its matching WebP preview.
+            // Convert PDF filename to its matching WebP preview.
             const imageFile = item.file.replace(/\.pdf$/i, '.webp')
 
             return (
@@ -338,18 +336,9 @@ function Certifications({ language }) {
                     <span>{item.date || text.dateUnknown}</span>
                   </div>
 
-                  {/* Actions */}
-                  <div className="mt-5 flex flex-col gap-2.5">
-                    <a
-                      href={`/certificates/${item.file}`}
-                      download={item.file}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--accent-color)] px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-color)]"
-                    >
-                      <Download size={16} />
-                      {text.download}
-                    </a>
-
-                    {item.verificationUrl && (
+                  {/* Verification / external link only */}
+                  {item.verificationUrl && (
+                    <div className="mt-5">
                       <a
                         href={item.verificationUrl}
                         target="_blank"
@@ -368,8 +357,8 @@ function Certifications({ language }) {
 
                         <ExternalLink size={14} />
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </article>
             )
