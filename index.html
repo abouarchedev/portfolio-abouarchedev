@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/images/favicon1.png?v=2" />
+
+    <meta
+      name="theme-color"
+      content="#FFFFFF"
+    />
+
+    <meta
+      name="description"
+      content="Portfolio d'Aymen Abouarche — Junior Développeur Web Full Stack."
+    />
+
+    <title>Portfolio @Abouarchedev | Junior Full Stack Developer</title>
+
+    <!-- Apply saved theme before the page renders -->
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme')
+        const theme = savedTheme === 'dark' ? 'dark' : 'light'
+
+        document.documentElement.classList.toggle(
+          'dark',
+          theme === 'dark'
+        )
+
+        document.documentElement.style.colorScheme = theme
+        document.documentElement.style.backgroundColor =
+          theme === 'dark' ? '#080F1E' : '#FFFFFF'
+      } catch {
+        document.documentElement.style.colorScheme = 'light'
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

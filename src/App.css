@@ -1,0 +1,725 @@
+
+/*
+  Portfolio - Aymen Abouarche
+  Global Visual Identity
+  Unified Background — Home to Footer
+*/
+
+/* =================================
+   GLOBAL SITE BACKGROUND
+   Continuous technical grid + blue ambient glow
+================================= */
+
+.site-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: clip;
+
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  background-image:
+    linear-gradient(
+      to right,
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      ellipse 700px 650px at 88% 5%,
+      var(--glow-primary),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 600px 600px at 8% 48%,
+      var(--glow-secondary),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 750px 700px at 88% 94%,
+      var(--glow-primary),
+      transparent 72%
+    );
+
+  background-size:
+    48px 48px,
+    48px 48px,
+    auto,
+    auto,
+    auto;
+
+  background-position:
+    center top,
+    center top,
+    center top,
+    center center,
+    center bottom;
+
+  background-repeat:
+    repeat,
+    repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* =================================
+   MAIN CONTENT
+   Keep all sections transparent
+================================= */
+
+.site-shell main {
+  position: relative;
+  background: transparent !important;
+}
+
+.site-shell main > section {
+  position: relative;
+  scroll-margin-top: 90px;
+
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.site-shell main > section + section {
+  border-top: 1px solid var(--section-divider);
+}
+
+.site-shell > footer {
+  position: relative;
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* =================================
+   REUSABLE SECTION TYPOGRAPHY
+================================= */
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--accent-color);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  border-radius: 10px;
+  background: var(--accent-color);
+}
+
+.section-title {
+  color: var(--text-primary);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.section-description {
+  max-width: 620px;
+  color: var(--text-secondary);
+
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+/* =================================
+   REUSABLE SURFACES
+================================= */
+
+.surface-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--surface-shadow);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.surface-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: var(--surface-shadow-hover);
+}
+
+/* =================================
+   OPTIONAL TECHNICAL DECORATIONS
+================================= */
+
+.technical-grid {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+
+  background-size: 32px 32px;
+}
+
+.blue-glow {
+  background: radial-gradient(
+    circle,
+    var(--glow-primary),
+    transparent 70%
+  );
+
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* =================================
+   BUTTON INTERACTIONS
+================================= */
+
+.site-shell button,
+.site-shell a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-shell button:disabled {
+  cursor: not-allowed;
+}
+
+/* =================================
+   PRELOADER
+================================= */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  background: var(--preloader-bg);
+  color: var(--preloader-text);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.65s ease;
+}
+
+.preloader--exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      to right,
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--grid-color) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+  background-position: center;
+
+  mask-image: radial-gradient(
+    ellipse at center,
+    black 15%,
+    transparent 85%
+  );
+}
+
+.preloader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse 500px 420px at 50% 45%,
+      var(--preloader-glow),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 350px 300px at 15% 90%,
+      var(--preloader-glow),
+      transparent 75%
+    );
+
+  filter: blur(25px);
+}
+
+.preloader__glow {
+  position: absolute;
+  z-index: -1;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+  background: var(--preloader-glow);
+
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.preloader__glow--one {
+  top: 5%;
+  right: -12%;
+}
+
+.preloader__glow--two {
+  bottom: -15%;
+  left: -12%;
+  opacity: 0.7;
+}
+
+.preloader__content {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: min(500px, calc(100% - 40px));
+  text-align: center;
+
+  animation: preloader-content-in 0.8s ease both;
+}
+
+/* =================================
+   PRELOADER IDENTITY
+================================= */
+
+.preloader__identity {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.preloader__eyebrow {
+  margin: 0 0 15px;
+
+  color: var(--preloader-accent);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.preloader__identity h1 {
+  margin: 0;
+
+  color: var(--preloader-text);
+
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+
+.preloader__identity h1 span {
+  color: var(--preloader-accent);
+}
+
+.preloader__description {
+  margin: 12px 0 0;
+
+  color: var(--preloader-muted);
+
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* =================================
+   LARGE PERCENTAGE
+================================= */
+
+.preloader__percentage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  color: var(--preloader-text);
+
+  font-size: clamp(76px, 13vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.085em;
+
+  text-shadow: 0 0 45px var(--preloader-glow);
+
+  animation: preloader-number-in 0.8s 0.15s ease both;
+}
+
+.preloader__percentage span {
+  margin-top: 10px;
+  margin-left: 7px;
+
+  color: var(--preloader-accent);
+
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+/* =================================
+   PRELOADER FOOTER
+================================= */
+
+.preloader__footer {
+  margin-top: 48px;
+
+  color: var(--preloader-muted);
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+}
+
+/* =================================
+   EXIT ANIMATION
+================================= */
+
+.preloader--exit .preloader__content {
+  transform: translateY(-14px) scale(0.97);
+  opacity: 0;
+
+  transition:
+    transform 0.45s ease,
+    opacity 0.4s ease;
+}
+
+/* =================================
+   PRELOADER ANIMATIONS
+================================= */
+
+@keyframes preloader-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes preloader-number-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 768px) {
+  .site-shell {
+    background-size:
+      36px 36px,
+      36px 36px,
+      auto,
+      auto,
+      auto;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+  .preloader::before {
+    background-size: 36px 36px;
+  }
+
+  .preloader__content {
+    width: calc(100% - 36px);
+  }
+
+  .preloader__identity {
+    margin-bottom: 30px;
+  }
+
+  .preloader__percentage {
+    font-size: clamp(72px, 17vw, 96px);
+  }
+
+  .preloader__percentage span {
+    margin-top: 8px;
+    margin-left: 5px;
+    font-size: 25px;
+  }
+
+  .preloader__footer {
+    margin-top: 38px;
+    font-size: 8px;
+  }
+
+  .preloader__glow {
+    width: 300px;
+    height: 300px;
+    filter: blur(75px);
+  }
+}
+
+/* =================================
+   ACCESSIBILITY
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader,
+  .preloader *,
+  .preloader::before,
+  .preloader::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =================================
+   CURSOR SPOTLIGHT — OVERLAY ONLY
+   Preserves existing absolute positioning
+================================= */
+
+.spotlight-target {
+  --spotlight-opacity: 0;
+}
+
+/* Give normal static cards a positioning context */
+
+.spotlight-target:not(.absolute) {
+  position: relative;
+}
+
+.spotlight-target::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.17),
+    rgba(59, 130, 246, 0.06) 42%,
+    transparent 75%
+  );
+
+  opacity: var(--spotlight-opacity);
+  transition: opacity 0.25s ease;
+}
+
+.dark .spotlight-target::after {
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.24),
+    rgba(59, 130, 246, 0.08) 42%,
+    transparent 75%
+  );
+}
+
+/* =================================
+   TOUCH SPOTLIGHT — MOBILE
+================================= */
+
+@media (hover: none), (pointer: coarse) {
+  .spotlight-target::after {
+    background: radial-gradient(
+      230px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.22),
+      rgba(59, 130, 246, 0.08) 45%,
+      transparent 78%
+    );
+
+    transition: opacity 0.2s ease;
+  }
+
+  .dark .spotlight-target::after {
+    background: radial-gradient(
+      250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.30),
+      rgba(59, 130, 246, 0.11) 45%,
+      transparent 78%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-target::after {
+    transition: none;
+  }
+}
+
+/* =================================
+   CUSTOM CURSOR
+================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-enabled,
+  html.custom-cursor-enabled * {
+    cursor: none !important;
+  }
+
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99998;
+
+    display: grid;
+    place-items: center;
+
+    width: 22px;
+    height: 22px;
+
+    border: 1.5px solid rgba(37, 99, 235, 0.8);
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.10);
+    box-shadow:
+      0 0 12px rgba(37, 99, 235, 0.16),
+      inset 0 0 8px rgba(37, 99, 235, 0.08);
+
+    pointer-events: none;
+    opacity: 0;
+
+    transform: translate(-50%, -50%) scale(0.75);
+
+    transition:
+      opacity 0.18s ease,
+      width 0.2s ease,
+      height 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .custom-cursor.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .custom-cursor__dot {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+    background: #2563EB;
+
+    box-shadow: 0 0 9px rgba(37, 99, 235, 0.55);
+
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .custom-cursor__hand {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+
+    color: #2563EB;
+    background: transparent;
+    fill: none;
+
+    opacity: 0;
+    transform: scale(0.65);
+
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .custom-cursor.is-hovering {
+    width: 28px;
+    height: 28px;
+
+    border-color: rgba(37, 99, 235, 0.95);
+    background: rgba(37, 99, 235, 0.13);
+
+    box-shadow:
+      0 0 18px rgba(37, 99, 235, 0.25),
+      inset 0 0 10px rgba(37, 99, 235, 0.10);
+  }
+
+  .custom-cursor.is-hovering .custom-cursor__dot {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  .custom-cursor.is-hovering .custom-cursor__hand {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .dark .custom-cursor {
+    border-color: rgba(96, 165, 250, 0.9);
+    background: rgba(59, 130, 246, 0.13);
+  }
+
+  .dark .custom-cursor__dot {
+    color: #60A5FA;
+    background-color: #60A5FA;
+  }
+
+  .dark .custom-cursor__hand {
+    color: #60A5FA;
+    background: transparent !important;
+    fill: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}
