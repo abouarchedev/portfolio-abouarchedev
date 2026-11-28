@@ -1,3 +1,4 @@
+
 /* =================================
    TECHNOLOGY MARQUEE
 ================================= */
@@ -33,6 +34,7 @@
   display: flex;
   width: 100%;
   overflow: hidden;
+  padding-block: 4px;
 }
 
 .skills-marquee__track {

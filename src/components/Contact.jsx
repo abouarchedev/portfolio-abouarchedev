@@ -2,18 +2,18 @@
 import { useState, useEffect, useRef } from 'react'
 import { Mail, Send, MapPin } from 'lucide-react'
 
-// Add your real Formspree endpoint here
-const FORMSPREE_ENDPOINT = ''
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljbkjnj'
+
+const initialFormData = {
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+}
 
 function Contact({ language }) {
   const [status, setStatus] = useState('idle')
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
+  const [formData, setFormData] = useState(initialFormData)
 
   // Contact entrance animation
   const sectionRef = useRef(null)
@@ -23,6 +23,12 @@ function Contact({ language }) {
     const section = sectionRef.current
 
     if (!section) return
+
+    // Respect reduced-motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsRevealed(true)
+      return
+    }
 
     if (!('IntersectionObserver' in window)) {
       setIsRevealed(true)
@@ -66,8 +72,10 @@ function Contact({ language }) {
       success: 'Votre message a été envoyé avec succès. Merci !',
       error: 'Une erreur est survenue. Veuillez réessayer.',
       notConfigured:
-        'Le formulaire sera activé après la configuration de Formspree.',
+        'Le formulaire est momentanément indisponible. Veuillez réessayer plus tard.',
       social: 'Retrouvez-moi également sur',
+      privacy:
+        'Vos informations seront utilisées uniquement pour répondre à votre message.',
     },
 
     en: {
@@ -88,8 +96,10 @@ function Contact({ language }) {
       success: 'Your message has been sent successfully. Thank you!',
       error: 'Something went wrong. Please try again.',
       notConfigured:
-        'The form will be activated after configuring Formspree.',
+        'The form is temporarily unavailable. Please try again later.',
       social: 'You can also find me on',
+      privacy:
+        'Your information will only be used to respond to your message.',
     },
   }
 
@@ -102,40 +112,59 @@ function Contact({ language }) {
       ...previous,
       [name]: value,
     }))
+
+    // Clear previous feedback when the user edits the form
+    if (status !== 'idle' && status !== 'sending') {
+      setStatus('idle')
+    }
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    // Prevent duplicate submissions
+    if (status === 'sending') return
+
+    const formElement = event.currentTarget
+
+    // Use native browser validation
+    if (!formElement.reportValidity()) return
 
     if (!FORMSPREE_ENDPOINT) {
       setStatus('not-configured')
       return
     }
 
+    setStatus('sending')
+
     try {
-      setStatus('sending')
+      const payload = new FormData(formElement)
+
+      // Configure reply-to and email subject
+      payload.set('_replyto', formData.email.trim())
+      payload.set(
+        '_subject',
+        `Portfolio contact — ${formData.subject.trim()}`,
+      )
 
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        body: new FormData(event.currentTarget),
+        body: payload,
         headers: {
           Accept: 'application/json',
         },
       })
 
       if (!response.ok) {
-        throw new Error('Submission failed')
+        throw new Error(`Formspree submission failed: ${response.status}`)
       }
 
+      // Reset controlled form fields after successful submission
+      setFormData(initialFormData)
+      formElement.reset()
       setStatus('success')
-
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      })
-    } catch {
+    } catch (error) {
+      console.error('Contact form submission error:', error)
       setStatus('error')
     }
   }
@@ -153,6 +182,13 @@ function Contact({ language }) {
     color: 'var(--text-primary)',
     backdropFilter: 'blur(8px)',
     WebkitBackdropFilter: 'blur(8px)',
+  }
+
+  const statusMessage = {
+    success: t.success,
+    error: t.error,
+    sending: t.sending,
+    'not-configured': t.notConfigured,
   }
 
   return (
@@ -216,7 +252,8 @@ function Contact({ language }) {
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=hi%40abouarchedev.tech"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative z-10 mt-1 inline-block text-sm text-brand hover:underline"
+                    aria-label="Contact me by email using Gmail"
+                    className="relative z-10 mt-1 inline-block text-sm text-brand hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                   >
                     hi@abouarchedev.tech
                   </a>
@@ -268,7 +305,7 @@ function Contact({ language }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub - Aymen Abouarche"
-                  className="relative z-10 inline-flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:border-brand hover:text-brand"
+                  className="relative z-10 inline-flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                   style={{
                     borderColor: 'var(--border-color)',
                     color: 'var(--text-primary)',
@@ -292,7 +329,7 @@ function Contact({ language }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn - Aymen Abouarche"
-                  className="relative z-10 inline-flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:border-brand hover:text-brand"
+                  className="relative z-10 inline-flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                   style={{
                     borderColor: 'var(--border-color)',
                     color: 'var(--text-primary)',
@@ -326,6 +363,23 @@ function Contact({ language }) {
               boxShadow: 'var(--surface-shadow)',
             }}
           >
+            {/* Honeypot anti-spam field */}
+            <div
+              className="absolute -left-[10000px] h-px w-px overflow-hidden"
+              aria-hidden="true"
+            >
+              <label htmlFor="contact-website">
+                Leave this field empty
+              </label>
+              <input
+                id="contact-website"
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="grid gap-5 sm:grid-cols-2">
               {/* Name */}
               <div>
@@ -347,7 +401,8 @@ function Contact({ language }) {
                   maxLength={80}
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand"
+                  disabled={status === 'sending'}
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand disabled:cursor-not-allowed disabled:opacity-60"
                   style={inputStyle}
                 />
               </div>
@@ -368,10 +423,11 @@ function Contact({ language }) {
                   name="email"
                   autoComplete="email"
                   required
-                  maxLength={150}
+                  maxLength={254}
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand"
+                  disabled={status === 'sending'}
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand disabled:cursor-not-allowed disabled:opacity-60"
                   style={inputStyle}
                 />
               </div>
@@ -397,7 +453,8 @@ function Contact({ language }) {
                 value={formData.subject}
                 onChange={handleChange}
                 placeholder={t.subjectPlaceholder}
-                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand"
+                disabled={status === 'sending'}
+                className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand disabled:cursor-not-allowed disabled:opacity-60"
                 style={inputStyle}
               />
             </div>
@@ -422,44 +479,67 @@ function Contact({ language }) {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder={t.messagePlaceholder}
-                className="w-full resize-y rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand"
+                disabled={status === 'sending'}
+                className="w-full resize-y rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-brand disabled:cursor-not-allowed disabled:opacity-60"
                 style={inputStyle}
               />
+
+              <div
+                className="mt-2 text-right text-xs"
+                style={{ color: 'var(--text-secondary)' }}
+                aria-live="polite"
+              >
+                {formData.message.length}/3000
+              </div>
             </div>
 
             {/* Status Messages */}
-            {status !== 'idle' && (
-              <p
-                role="status"
-                aria-live="polite"
-                className="mt-5 rounded-lg border px-4 py-3 text-sm"
-                style={{
-                  color:
-                    status === 'success'
-                      ? '#15803D'
-                      : status === 'sending'
-                        ? 'var(--text-secondary)'
-                        : '#DC2626',
-                  background: 'var(--input-glass)',
-                  borderColor: 'var(--border-color)',
-                }}
-              >
-                {status === 'success' && t.success}
-                {status === 'error' && t.error}
-                {status === 'sending' && t.sending}
-                {status === 'not-configured' && t.notConfigured}
-              </p>
-            )}
+            <div
+              className="mt-5"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {status !== 'idle' && (
+                <p
+                  className="rounded-lg border px-4 py-3 text-sm leading-6"
+                  style={{
+                    color:
+                      status === 'success'
+                        ? '#15803D'
+                        : status === 'sending'
+                          ? 'var(--text-secondary)'
+                          : '#DC2626',
+                    background: 'var(--input-glass)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                >
+                  {statusMessage[status]}
+                </p>
+              )}
+            </div>
 
             {/* Submit Button */}
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {status === 'sending' ? t.sending : t.send}
-              <Send size={16} />
+
+              <Send
+                size={16}
+                className={status === 'sending' ? 'animate-pulse' : ''}
+                aria-hidden="true"
+              />
             </button>
+
+            <p
+              className="mt-4 text-xs leading-5"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {t.privacy}
+            </p>
           </form>
         </div>
       </div>

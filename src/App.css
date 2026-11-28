@@ -524,19 +524,27 @@
 }
 
 /* =================================
-   CURSOR SPOTLIGHT — OVERLAY ONLY
-   Preserves existing absolute positioning
+   GLOBAL CARD SPOTLIGHT
+   Background glow + interactive border glow
 ================================= */
 
 .spotlight-target {
   --spotlight-opacity: 0;
-}
 
-/* Give normal static cards a positioning context */
+  /*
+    Keep the spotlight attached to the card.
+    Existing absolute-positioned cards keep their positioning.
+  */
+}
 
 .spotlight-target:not(.absolute) {
   position: relative;
 }
+
+/* =================================
+   INNER BLUE SPOTLIGHT
+   Existing background-following effect
+================================= */
 
 .spotlight-target::after {
   content: "";
@@ -544,6 +552,7 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
+
   border-radius: inherit;
 
   background: radial-gradient(
@@ -563,6 +572,74 @@
     rgba(59, 130, 246, 0.24),
     rgba(59, 130, 246, 0.08) 42%,
     transparent 75%
+  );
+}
+
+/* =================================
+   INTERACTIVE BORDER GLOW
+   The nearest card edge lights up around the cursor
+================================= */
+
+.spotlight-target::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  padding: 1.2px;
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    175px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(37, 99, 235, 0.95) 0%,
+    rgba(59, 130, 246, 0.72) 22%,
+    rgba(99, 102, 241, 0.38) 42%,
+    transparent 72%
+  );
+
+  opacity: var(--spotlight-opacity);
+
+  /*
+    Mask the center so only the card border remains visible.
+  */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
+
+  transition: opacity 0.2s ease;
+}
+
+/* Light theme border glow */
+
+:root:not(.dark) .spotlight-target::before {
+  filter: drop-shadow(
+    0 0 3px rgba(37, 99, 235, 0.16)
+  );
+}
+
+/* Dark theme border glow */
+
+.dark .spotlight-target::before {
+  background: radial-gradient(
+    190px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(96, 165, 250, 1) 0%,
+    rgba(59, 130, 246, 0.82) 22%,
+    rgba(129, 140, 248, 0.46) 44%,
+    transparent 74%
+  );
+
+  filter: drop-shadow(
+    0 0 5px rgba(59, 130, 246, 0.32)
   );
 }
 
@@ -590,9 +667,32 @@
       transparent 78%
     );
   }
+
+  .spotlight-target::before {
+    background: radial-gradient(
+      155px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(37, 99, 235, 0.9) 0%,
+      rgba(59, 130, 246, 0.6) 30%,
+      transparent 72%
+    );
+  }
+
+  .dark .spotlight-target::before {
+    background: radial-gradient(
+      170px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(96, 165, 250, 1) 0%,
+      rgba(59, 130, 246, 0.8) 30%,
+      transparent 74%
+    );
+  }
 }
 
+/* =================================
+   REDUCED MOTION
+================================= */
+
 @media (prefers-reduced-motion: reduce) {
+  .spotlight-target::before,
   .spotlight-target::after {
     transition: none;
   }

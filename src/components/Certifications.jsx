@@ -16,18 +16,18 @@ function Certifications({ language }) {
       title: 'Certifications & attestations',
       description:
         'Un aperçu des formations et certifications qui témoignent de mon engagement dans l’apprentissage continu et le développement de mes compétences.',
-      total: 'Certifications obtenues',
+      total: 'Documents présentés',
       attendance: 'Attestation de participation',
       completion: 'Certificat de formation',
       verify: 'Vérifier le certificat',
       view: 'Consulter le certificat',
-      dateUnknown: 'Date non précisée',
       preview: 'Aperçu du certificat',
       items: [
         {
           title: 'AI for Positive Futures',
           organization: 'Orange Digital Center Ben M’Sick × Capgemini',
           date: '21 octobre 2026',
+          sortDate: '2026-10-21',
           type: 'attendance',
           icon: Award,
           file: 'ai-for-positive-futures.pdf',
@@ -38,6 +38,7 @@ function Certifications({ language }) {
           title: 'Certified Cybersecurity Educator Professional (CCEP)',
           organization: 'Red Team Leaders',
           date: '16 octobre 2026',
+          sortDate: '2026-10-16',
           type: 'completion',
           icon: ShieldCheck,
           file: 'ccep.pdf',
@@ -51,7 +52,8 @@ function Certifications({ language }) {
           title: '1 Million Prompters',
           organization:
             'Dubai Future Foundation × Dubai Centre for Artificial Intelligence',
-          date: null,
+          date: '3 octobre 2026',
+          sortDate: '2026-10-03',
           type: 'completion',
           icon: Award,
           file: 'one-million-prompters.pdf',
@@ -65,6 +67,7 @@ function Certifications({ language }) {
           title: 'Power BI for Beginners',
           organization: 'Microsoft × SkillUp Simplilearn',
           date: '7 octobre 2026',
+          sortDate: '2026-10-07',
           type: 'completion',
           icon: Award,
           file: 'power-bi-beginners.pdf',
@@ -78,6 +81,7 @@ function Certifications({ language }) {
           title: 'Introduction to PHP',
           organization: 'Alison',
           date: '10 juin 2026',
+          sortDate: '2026-06-10',
           type: 'completion',
           icon: Code2,
           file: 'introduction-to-php.pdf',
@@ -90,6 +94,7 @@ function Certifications({ language }) {
           title: 'Introduction to HTML',
           organization: 'Sololearn',
           date: '13 février 2026',
+          sortDate: '2026-02-13',
           type: 'completion',
           icon: Code2,
           file: 'introduction-to-html.pdf',
@@ -103,6 +108,7 @@ function Certifications({ language }) {
           title: 'Introduction to Cybersecurity',
           organization: 'Cisco Networking Academy',
           date: '6 janvier 2026',
+          sortDate: '2026-01-06',
           type: 'completion',
           icon: ShieldCheck,
           file: 'introduction-to-cybersecurity.pdf',
@@ -116,6 +122,7 @@ function Certifications({ language }) {
           title: 'Data Analysis with Python',
           organization: 'Orange Digital Center Club Ben M’Sick',
           date: '26–28 octobre 2026',
+          sortDate: '2026-10-28',
           type: 'attendance',
           icon: GraduationCap,
           file: 'data-analysis-python.pdf',
@@ -130,18 +137,18 @@ function Certifications({ language }) {
       title: 'Certifications & achievements',
       description:
         'An overview of training programs and certifications reflecting my commitment to continuous learning and skill development.',
-      total: 'Certifications obtained',
+      total: 'Training records & certificates',
       attendance: 'Certificate of attendance',
       completion: 'Certificate of completion',
       verify: 'Verify certificate',
       view: 'View certificate',
-      dateUnknown: 'Date not specified',
       preview: 'Certificate preview',
       items: [
         {
           title: 'AI for Positive Futures',
           organization: 'Orange Digital Center Ben M’Sick × Capgemini',
           date: 'October 21, 2026',
+          sortDate: '2026-10-21',
           type: 'attendance',
           icon: Award,
           file: 'ai-for-positive-futures.pdf',
@@ -152,6 +159,7 @@ function Certifications({ language }) {
           title: 'Certified Cybersecurity Educator Professional (CCEP)',
           organization: 'Red Team Leaders',
           date: 'October 16, 2026',
+          sortDate: '2026-10-16',
           type: 'completion',
           icon: ShieldCheck,
           file: 'ccep.pdf',
@@ -165,7 +173,8 @@ function Certifications({ language }) {
           title: '1 Million Prompters',
           organization:
             'Dubai Future Foundation × Dubai Centre for Artificial Intelligence',
-          date: null,
+          date: 'October 3, 2026',
+          sortDate: '2026-10-03',
           type: 'completion',
           icon: Award,
           file: 'one-million-prompters.pdf',
@@ -179,6 +188,7 @@ function Certifications({ language }) {
           title: 'Power BI for Beginners',
           organization: 'Microsoft × SkillUp Simplilearn',
           date: 'October 7, 2026',
+          sortDate: '2026-10-07',
           type: 'completion',
           icon: Award,
           file: 'power-bi-beginners.pdf',
@@ -192,6 +202,7 @@ function Certifications({ language }) {
           title: 'Introduction to PHP',
           organization: 'Alison',
           date: 'June 10, 2026',
+          sortDate: '2026-06-10',
           type: 'completion',
           icon: Code2,
           file: 'introduction-to-php.pdf',
@@ -204,6 +215,7 @@ function Certifications({ language }) {
           title: 'Introduction to HTML',
           organization: 'Sololearn',
           date: 'February 13, 2026',
+          sortDate: '2026-02-13',
           type: 'completion',
           icon: Code2,
           file: 'introduction-to-html.pdf',
@@ -217,6 +229,7 @@ function Certifications({ language }) {
           title: 'Introduction to Cybersecurity',
           organization: 'Cisco Networking Academy',
           date: 'January 6, 2026',
+          sortDate: '2026-01-06',
           type: 'completion',
           icon: ShieldCheck,
           file: 'introduction-to-cybersecurity.pdf',
@@ -230,6 +243,7 @@ function Certifications({ language }) {
           title: 'Data Analysis with Python',
           organization: 'Orange Digital Center Club Ben M’Sick',
           date: 'October 26–28, 2026',
+          sortDate: '2026-10-28',
           type: 'attendance',
           icon: GraduationCap,
           file: 'data-analysis-python.pdf',
@@ -242,6 +256,13 @@ function Certifications({ language }) {
 
   const text = content[language] || content.fr
 
+  // Newest certificates first.
+  const sortedItems = [...text.items].sort(
+    (a, b) =>
+      new Date(b.sortDate).getTime() -
+      new Date(a.sortDate).getTime()
+  )
+
   return (
     <section
       id="certifications"
@@ -250,11 +271,17 @@ function Certifications({ language }) {
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
         <div className="mb-14 max-w-2xl">
-          <span className="section-eyebrow">{text.label}</span>
+          <span className="section-eyebrow">
+            {text.label}
+          </span>
 
-          <h2 className="section-title mt-5">{text.title}</h2>
+          <h2 className="section-title mt-5">
+            {text.title}
+          </h2>
 
-          <p className="section-description mt-5">{text.description}</p>
+          <p className="section-description mt-5">
+            {text.description}
+          </p>
         </div>
 
         {/* Total count */}
@@ -265,7 +292,7 @@ function Certifications({ language }) {
 
           <div>
             <p className="text-2xl font-bold leading-none text-[var(--text-primary)]">
-              {String(text.items.length).padStart(2, '0')}
+              {String(sortedItems.length).padStart(2, '0')}
             </p>
 
             <p className="mt-1.5 text-xs text-[var(--text-secondary)]">
@@ -276,11 +303,13 @@ function Certifications({ language }) {
 
         {/* Certificates grid */}
         <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {text.items.map((item, index) => {
+          {sortedItems.map((item, index) => {
             const CertificateIcon = item.icon
 
-            // Convert PDF filename to its matching WebP preview.
-            const imageFile = item.file.replace(/\.pdf$/i, '.webp')
+            const imageFile = item.file.replace(
+              /\.pdf$/i,
+              '.webp'
+            )
 
             return (
               <article
@@ -332,11 +361,17 @@ function Certifications({ language }) {
 
                   {/* Date */}
                   <div className="mt-6 flex items-center gap-2 border-t border-[var(--border-color)] pt-5 text-xs text-[var(--text-muted)]">
-                    <CalendarDays size={15} className="shrink-0" />
-                    <span>{item.date || text.dateUnknown}</span>
+                    <CalendarDays
+                      size={15}
+                      className="shrink-0"
+                    />
+
+                    <time dateTime={item.sortDate}>
+                      {item.date}
+                    </time>
                   </div>
 
-                  {/* Verification / external link only */}
+                  {/* Verification link */}
                   {item.verificationUrl && (
                     <div className="mt-5">
                       <a

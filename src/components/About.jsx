@@ -7,6 +7,7 @@ import {
   Layers3,
   Database,
   Lightbulb,
+  BriefcaseBusiness,
 } from 'lucide-react'
 
 function About({ language }) {
@@ -16,26 +17,27 @@ function About({ language }) {
       title: 'Derrière le code,',
       titleAccent: 'une ambition.',
       intro:
-        'Je suis un jeune développeur passionné par la création de solutions web utiles, modernes et bien structurées.',
+        'Ce qui me plaît dans le développement web, c’est de partir d’une idée, de réfléchir à la façon de la présenter, puis de la voir prendre forme dans un site qui fonctionne.',
       name: 'Aymen Abouarche',
       description:
-        'Actuellement en deuxième année de Développement Web Full Stack à l’ISTA Roches Noires – OFPPT, à Casablanca.',
+        'Je suis étudiant en deuxième année de Développement Web Full Stack à l’ISTA Roches Noires – OFPPT, à Casablanca.',
       paragraph:
-        'Mon parcours me permet de découvrir les différentes étapes de création d’une application web : concevoir une interface, développer ses fonctionnalités, manipuler les données et connecter les différentes parties du projet.',
+        'Pendant ma formation, j’apprends à construire un projet web dans son ensemble. J’aime autant travailler sur l’apparence d’une page que réfléchir à ce qui se passe derrière : les fonctionnalités, les échanges avec une base de données et la logique qui relie tout. J’essaie de mettre ces connaissances en pratique dans mes projets, tout en prenant le temps de comprendre ce que je fais.',
       objective:
-        'Je cherche aujourd’hui un stage d’application pour mettre mes connaissances en pratique, apprendre au contact d’une équipe et participer à des projets concrets.',
+        'Aujourd’hui, j’aimerais rejoindre une équipe dans le cadre d’un stage d’application. C’est l’occasion pour moi de découvrir le quotidien d’un développeur, de participer à de vrais projets et de voir comment les choses se passent en dehors de la formation.',
       currently: 'FORMATION ACTUELLE',
       school: 'ISTA Roches Noires',
       program: 'Développement Web Full Stack',
       location: 'Casablanca, Maroc',
-      focus: 'DOMAINES D’INTÉRÊT',
+      focus: 'CE QUI M’INTÉRESSE',
+      focusTitle: 'Les sujets que j’aime explorer',
       cards: [
         {
           icon: Code2,
           number: '01',
           title: 'Développement Web',
           description:
-            'Création d’interfaces et développement de fonctionnalités frontend et backend.',
+            'J’aime créer des interfaces claires et agréables à utiliser. Ce qui m’intéresse surtout, c’est de comprendre comment passer d’une simple idée à une page web complète, avec des fonctionnalités utiles.',
           tags: ['HTML', 'CSS', 'JavaScript', 'PHP'],
         },
         {
@@ -43,48 +45,74 @@ function About({ language }) {
           number: '02',
           title: 'Données & logique',
           description:
-            'Manipulation des bases de données et organisation de la logique des applications.',
+            'Je suis aussi curieux de ce qui se passe derrière une interface : organiser les informations, travailler avec les bases de données et comprendre comment les différentes parties d’une application communiquent.',
           tags: ['MySQL', 'SQL', 'Python'],
         },
         {
           icon: Lightbulb,
           number: '03',
-          title: 'Apprentissage continu',
+          title: 'Apprendre & explorer',
           description:
-            'Découverte de nouvelles technologies et mise en pratique à travers des projets.',
+            'J’aime découvrir de nouveaux outils, essayer différentes approches et voir ce qu’ils peuvent apporter à mes projets. En ce moment, je développe notamment mes connaissances en React.js et Laravel.',
           tags: ['React.js', 'Laravel', 'Git'],
         },
       ],
-      goalLabel: 'MON OBJECTIF',
-      goal:
-        'Passer de la formation à l’expérience professionnelle, avec curiosité, rigueur et envie de progresser.',
-      opportunity: 'Ouvert aux opportunités de stage',
+      nextLabel: 'LA SUITE DE MON PARCOURS',
+      nextTitle: 'De l’apprentissage à la pratique.',
+      nextText:
+        'Je ne veux pas seulement apprendre des notions et passer à la suite. J’aimerais les utiliser dans de vrais projets, comprendre les méthodes de travail d’une équipe et gagner peu à peu en autonomie.',
+      journeyLabel: 'LES PROCHAINES ÉTAPES',
+      currentGoal: 'MON OBJECTIF ACTUEL',
+      journey: [
+        {
+          number: '01',
+          title: 'Stage',
+          description:
+            'Découvrir le travail en équipe, participer aux tâches d’un projet et apprendre au contact de développeurs.',
+        },
+        {
+          number: '02',
+          title: 'Expérience concrète',
+          description:
+            'Prendre confiance, améliorer ma façon de travailler et mieux comprendre toutes les étapes d’un projet.',
+        },
+        {
+          number: '03',
+          title: 'Continuer à évoluer',
+          description:
+            'Approfondir mes connaissances, explorer de nouvelles technologies et relever des projets plus intéressants.',
+        },
+      ],
+      internship: 'À la recherche d’un stage',
+      nextStep: '01 — PROCHAINE ÉTAPE',
     },
+
     en: {
       label: 'ABOUT ME',
       title: 'Beyond the code,',
       titleAccent: 'a clear ambition.',
       intro:
-        'I am a young developer passionate about building useful, modern and well-structured web solutions.',
+        'What I enjoy about web development is starting with an idea, thinking about how to bring it to life, and then seeing it become a website that actually works.',
       name: 'Aymen Abouarche',
       description:
-        'Currently in my second year of Full Stack Web Development at ISTA Roches Noires – OFPPT, in Casablanca.',
+        'I am a second-year Full Stack Web Development student at ISTA Roches Noires – OFPPT, in Casablanca.',
       paragraph:
-        'My studies allow me to explore the different stages of building a web application: designing an interface, developing its features, managing data and connecting the different parts of a project.',
+        'During my studies, I am learning how to build a web project from different sides. I enjoy working on how a page looks, but I am just as curious about what happens behind it: its features, database connections and the logic that brings everything together. I try to put what I learn into practice through my projects and take the time to understand how things work.',
       objective:
-        'I am currently looking for an application internship to put my knowledge into practice, learn from a team and contribute to real projects.',
+        'At this stage, I would like to join a team for an application internship. It would give me the chance to discover a developer’s daily work, take part in real projects and see how things are done outside the classroom.',
       currently: 'CURRENT EDUCATION',
       school: 'ISTA Roches Noires',
       program: 'Full Stack Web Development',
       location: 'Casablanca, Morocco',
-      focus: 'AREAS OF INTEREST',
+      focus: 'WHAT INTERESTS ME',
+      focusTitle: 'Things I enjoy exploring',
       cards: [
         {
           icon: Code2,
           number: '01',
           title: 'Web Development',
           description:
-            'Building interfaces and developing frontend and backend features.',
+            'I enjoy building interfaces that are clear and easy to use. What interests me most is turning a simple idea into a complete web page with features that serve a real purpose.',
           tags: ['HTML', 'CSS', 'JavaScript', 'PHP'],
         },
         {
@@ -92,22 +120,46 @@ function About({ language }) {
           number: '02',
           title: 'Data & Logic',
           description:
-            'Working with databases and organizing application logic.',
+            'I am also curious about what happens behind an interface: organizing information, working with databases and understanding how different parts of an application communicate.',
           tags: ['MySQL', 'SQL', 'Python'],
         },
         {
           icon: Lightbulb,
           number: '03',
-          title: 'Continuous Learning',
+          title: 'Learning & Exploring',
           description:
-            'Exploring new technologies and applying them through projects.',
+            'I enjoy discovering new tools, trying different approaches and seeing how they can improve my projects. Right now, I am also building my knowledge of React.js and Laravel.',
           tags: ['React.js', 'Laravel', 'Git'],
         },
       ],
-      goalLabel: 'MY OBJECTIVE',
-      goal:
-        'Moving from education to professional experience with curiosity, discipline and a desire to improve.',
-      opportunity: 'Open to internship opportunities',
+      nextLabel: "WHAT'S NEXT FOR ME",
+      nextTitle: 'From learning to doing.',
+      nextText:
+        'I do not want to just learn new concepts and move on. I want to use them in real projects, understand how a team works and gradually become more independent in what I do.',
+      journeyLabel: 'WHAT I WANT TO WORK TOWARDS',
+      currentGoal: 'CURRENT GOAL',
+      journey: [
+        {
+          number: '01',
+          title: 'Internship',
+          description:
+            'Experience teamwork, contribute to project tasks and learn from other developers.',
+        },
+        {
+          number: '02',
+          title: 'Real-world experience',
+          description:
+            'Build confidence, improve the way I work and understand the different stages of a project.',
+        },
+        {
+          number: '03',
+          title: 'Keep growing',
+          description:
+            'Deepen my knowledge, explore new technologies and take on more interesting projects.',
+        },
+      ],
+      internship: 'Looking for an internship',
+      nextStep: '01 — NEXT STEP',
     },
   }
 
@@ -205,7 +257,7 @@ function About({ language }) {
                 {t.focus}
               </p>
               <h3 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
-                {language === 'en' ? 'What I focus on' : 'Ce qui me motive'}
+                {t.focusTitle}
               </h3>
             </div>
 
@@ -260,21 +312,104 @@ function About({ language }) {
           </div>
         </div>
 
-        {/* Career objective */}
-        <div className="mt-16 flex flex-col gap-6 rounded-3xl bg-blue-600 p-7 text-white shadow-xl shadow-blue-600/10 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold tracking-[0.2em] text-blue-100">
-              {t.goalLabel}
-            </p>
+        {/* Next step */}
+        <div className="group relative mt-16 overflow-hidden rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/5 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-blue-900 sm:p-10">
+          <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-blue-500/[0.06] blur-3xl transition-opacity duration-500 group-hover:bg-blue-500/[0.10]" />
 
-            <p className="mt-3 text-lg font-semibold leading-8 sm:text-xl">
-              {t.goal}
-            </p>
-          </div>
+          <div className="relative">
 
-          <div className="flex shrink-0 items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-4 py-3 text-xs font-semibold text-white sm:self-center">
-            <Target size={17} />
-            {t.opportunity}
+            {/* Heading and introduction */}
+            <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14">
+              <div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400">
+                    <Target size={24} />
+                  </div>
+
+                  <span className="text-[11px] font-bold tracking-[0.2em] text-blue-600 dark:text-blue-400">
+                    {t.nextLabel}
+                  </span>
+                </div>
+
+                <h3 className="mt-6 max-w-sm text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                  {t.nextTitle}
+                </h3>
+
+                <div className="mt-6 flex items-center gap-3">
+                  <span className="h-px w-8 bg-blue-600" />
+                  <span className="text-xs font-semibold text-gray-400 dark:text-slate-500">
+                    {t.nextStep}
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-base leading-8 text-gray-600 dark:text-slate-300 sm:text-lg">
+                {t.nextText}
+              </p>
+            </div>
+
+            {/* Three-step journey */}
+            <div className="mt-12 border-t border-gray-100 pt-8 dark:border-slate-800">
+              <p className="mb-7 text-[11px] font-bold tracking-[0.2em] text-gray-400 dark:text-slate-500">
+                {t.journeyLabel}
+              </p>
+
+              <div className="grid gap-5 md:grid-cols-3">
+                {t.journey.map((step, index) => (
+                  <div
+                    key={step.number}
+                    className={`relative rounded-2xl border p-5 transition-colors duration-300 ${
+                      index === 0
+                        ? 'border-blue-200 bg-blue-50/70 dark:border-blue-900/70 dark:bg-blue-950/30'
+                        : 'border-gray-100 bg-gray-50/70 dark:border-slate-800 dark:bg-slate-900/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`text-sm font-bold tracking-wider ${
+                          index === 0
+                            ? 'text-blue-600 dark:text-blue-400'
+                            : 'text-gray-400 dark:text-slate-600'
+                        }`}
+                      >
+                        {step.number}
+                      </span>
+
+                      {index === 0 && (
+                        <span className="rounded-full bg-blue-100 px-3 py-1 text-[9px] font-bold tracking-wider text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">
+                          {t.currentGoal}
+                        </span>
+                      )}
+                    </div>
+
+                    <h4
+                      className={`mt-5 text-lg font-bold ${
+                        index === 0
+                          ? 'text-gray-900 dark:text-white'
+                          : 'text-gray-800 dark:text-slate-200'
+                      }`}
+                    >
+                      {step.title}
+                    </h4>
+
+                    <p className="mt-2 text-sm leading-7 text-gray-500 dark:text-slate-400">
+                      {step.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Internship status */}
+            <div className="mt-8 flex items-center gap-3 border-t border-gray-100 pt-6 dark:border-slate-800">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400">
+                <BriefcaseBusiness size={19} />
+              </div>
+
+              <span className="text-sm font-semibold text-gray-800 dark:text-slate-200">
+                {t.internship}
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -42,7 +42,7 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
     },
   }
 
-  const t = translations[language] || translations.fr
+  const t = translations[language] || translations.en
 
   const links = [
     { label: t.home, href: '#accueil', id: 'accueil' },
@@ -50,15 +50,10 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
     { label: t.skills, href: '#competences', id: 'competences' },
     { label: t.projects, href: '#projets', id: 'projets' },
     { label: t.education, href: '#formation', id: 'formation' },
-    {
-      label: t.certificates,
-      href: '#certifications',
-      id: 'certifications',
-    },
+    { label: t.certificates, href: '#certifications', id: 'certifications' },
     { label: t.contact, href: '#contact', id: 'contact' },
   ]
 
-  // Navigate to a section and preserve the selected active state
   const navigateToSection = (event, sectionId) => {
     event.preventDefault()
 
@@ -116,21 +111,14 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
     const updateActiveSection = () => {
       const viewportHeight = window.innerHeight
       const activationLine = viewportHeight * 0.3
-
       const scrollY = window.scrollY
-      const documentHeight =
-        document.documentElement.scrollHeight
+      const documentHeight = document.documentElement.scrollHeight
 
-      // Contact is active at the bottom of the page
-      if (
-        scrollY + viewportHeight >=
-        documentHeight - 5
-      ) {
+      if (scrollY + viewportHeight >= documentHeight - 5) {
         setActiveSection('contact')
         return
       }
 
-      // Home is active at the top
       if (scrollY < 80) {
         setActiveSection('accueil')
         return
@@ -166,13 +154,10 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
       }
 
       navigationTargetRef.current = null
-
-      // Preserve the exact section selected by the user
       setActiveSection(targetId)
     }
 
     const handleScroll = () => {
-      // Keep the clicked section active during navigation
       if (navigationTargetRef.current) {
         setActiveSection(navigationTargetRef.current)
 
@@ -180,7 +165,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
           clearTimeout(navigationFallbackTimerRef.current)
         }
 
-        // Fallback when scrollend is unavailable
         navigationFallbackTimerRef.current = setTimeout(
           finishNavigation,
           700
@@ -279,7 +263,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
             : 'border-white/30 bg-white/20 shadow-[0_8px_32px_rgba(15,23,42,0.05),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-3xl backdrop-saturate-150 dark:border-white/10 dark:bg-slate-950/15 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]'
         }`}
       >
-        {/* Glass reflection */}
         <span className="pointer-events-none absolute inset-x-8 top-0 z-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/30" />
 
         {/* Brand */}
@@ -320,6 +303,9 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
                     navigateToSection(event, link.id)
                   }
                   aria-current={isActive ? 'location' : undefined}
+                  style={{
+                    color: isActive ? '#FFFFFF' : undefined,
+                  }}
                   className={`relative whitespace-nowrap rounded-full px-2 py-2 text-[10px] font-semibold transition-all duration-300 xl:px-2.5 xl:text-[11px] ${
                     isActive
                       ? 'bg-blue-600 text-white shadow-[0_3px_12px_rgba(37,99,235,0.22)]'
@@ -335,7 +321,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
 
         {/* Actions */}
         <div className="relative z-10 flex shrink-0 items-center gap-1 sm:gap-1.5">
-          {/* Language */}
           <button
             type="button"
             onClick={toggleLanguage}
@@ -346,7 +331,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
             {language.toUpperCase()}
           </button>
 
-          {/* Theme */}
           <button
             type="button"
             onClick={toggleTheme}
@@ -361,11 +345,11 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
             )}
           </button>
 
-          {/* Contact CTA */}
           <a
             href="#contact"
             onClick={(event) => navigateToSection(event, 'contact')}
-            className="group hidden h-9 items-center gap-1.5 rounded-full bg-blue-600 px-3 text-[11px] font-bold text-white shadow-[0_4px_14px_rgba(37,99,235,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.25)] sm:inline-flex sm:h-10 sm:px-3.5 sm:text-xs"
+            style={{ color: '#FFFFFF' }}
+            className="group hidden h-9 items-center gap-1.5 rounded-full bg-blue-600 px-3 text-[11px] font-bold !text-white shadow-[0_4px_14px_rgba(37,99,235,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.25)] sm:inline-flex sm:h-10 sm:px-3.5 sm:text-xs"
           >
             {t.contactAction}
             <ArrowUpRight
@@ -374,7 +358,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
             />
           </a>
 
-          {/* Mobile menu toggle */}
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
@@ -401,7 +384,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
         <span className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/30" />
 
         <div className="relative p-3 sm:p-4">
-          {/* Mobile panel header */}
           <div className="mb-3 flex items-center justify-between px-2 py-2">
             <div>
               <span className="block text-xs font-bold uppercase tracking-[0.16em] text-gray-600 dark:text-slate-300">
@@ -418,7 +400,6 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
             </span>
           </div>
 
-          {/* Mobile links */}
           <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
             {links.map((link, index) => {
               const isActive = activeSection === link.id
@@ -432,14 +413,26 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
                   }
                   tabIndex={menuOpen ? 0 : -1}
                   aria-current={isActive ? 'location' : undefined}
+                  style={{
+                    color: isActive ? '#FFFFFF' : undefined,
+                  }}
                   className={`flex items-center justify-between rounded-xl border px-3.5 py-3 transition-all duration-200 ${
                     isActive
-                      ? 'border-blue-200/50 bg-blue-50/60 text-blue-700 dark:border-blue-900/40 dark:bg-blue-500/10 dark:text-blue-400'
+                      ? 'border-blue-600 bg-blue-600 text-white shadow-[0_3px_12px_rgba(37,99,235,0.22)]'
                       : 'border-transparent text-gray-700 hover:border-white/40 hover:bg-white/25 hover:text-blue-600 dark:text-slate-300 dark:hover:border-white/10 dark:hover:bg-white/5 dark:hover:text-blue-400'
                   }`}
                 >
                   <span className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold text-gray-500 dark:text-slate-500">
+                    <span
+                      style={{
+                        color: isActive ? '#FFFFFF' : undefined,
+                      }}
+                      className={`text-[10px] font-bold ${
+                        isActive
+                          ? 'text-white'
+                          : 'text-gray-500 dark:text-slate-500'
+                      }`}
+                    >
                       0{index + 1}
                     </span>
 
@@ -449,19 +442,19 @@ function Navbar({ language, setLanguage, theme, setTheme }) {
                   </span>
 
                   {isActive && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   )}
                 </a>
               )
             })}
           </div>
 
-          {/* Mobile contact CTA */}
           <a
             href="#contact"
             onClick={(event) => navigateToSection(event, 'contact')}
             tabIndex={menuOpen ? 0 : -1}
-            className="group mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(37,99,235,0.2)] transition hover:bg-blue-700"
+            style={{ color: '#FFFFFF' }}
+            className="group mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold !text-white shadow-[0_4px_14px_rgba(37,99,235,0.2)] transition hover:bg-blue-700"
           >
             {t.contactAction}
             <ArrowUpRight

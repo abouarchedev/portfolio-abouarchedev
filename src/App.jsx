@@ -37,7 +37,7 @@ function Preloader({ onComplete, language }) {
     },
   }
 
-  const text = content[language] || content.fr
+  const text = content[language] || content.en
 
   useEffect(() => {
     let animationFrame
@@ -221,19 +221,39 @@ function CustomCursor() {
   )
 }
 
+/* =================================
+   INITIAL THEME
+================================= */
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem('portfolio-theme')
+
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    return savedTheme
+  }
+
+  return window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches
+    ? 'dark'
+    : 'light'
+}
+
 function App() {
   const [language, setLanguage] = useState(
-    () => localStorage.getItem('portfolio-language') || 'fr'
+    () => localStorage.getItem('portfolio-language') || 'en'
   )
 
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem('portfolio-theme') || 'light'
-  )
+  const [theme, setTheme] = useState(getInitialTheme)
 
   const [isLoading, setIsLoading] = useState(true)
 
   const activeTouchCardRef = useRef(null)
   const touchSpotlightTimeoutRef = useRef(null)
+
+  // =================================
+  // THEME MANAGEMENT
+  // =================================
 
   useEffect(() => {
     document.documentElement.classList.toggle(
@@ -242,9 +262,44 @@ function App() {
     )
 
     document.documentElement.style.colorScheme = theme
-
-    localStorage.setItem('portfolio-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    )
+
+    const handleSystemThemeChange = (event) => {
+      const savedTheme = localStorage.getItem('portfolio-theme')
+
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return
+      }
+
+      setTheme(event.matches ? 'dark' : 'light')
+    }
+
+    mediaQuery.addEventListener(
+      'change',
+      handleSystemThemeChange
+    )
+
+    return () => {
+      mediaQuery.removeEventListener(
+        'change',
+        handleSystemThemeChange
+      )
+    }
+  }, [])
+
+  const handleThemeChange = useCallback((nextTheme) => {
+    localStorage.setItem('portfolio-theme', nextTheme)
+    setTheme(nextTheme)
+  }, [])
+
+  // =================================
+  // LANGUAGE MANAGEMENT
+  // =================================
 
   useEffect(() => {
     document.documentElement.lang = language
@@ -264,8 +319,18 @@ function App() {
     if (!(target instanceof Element)) return null
 
     return target.closest(
-      '.skills-chip, .skills-marquee__item, article, aside, form, [class*="rounded-2xl"]'
+      '.education-card, .skills-chip, .skills-marquee__item, article:not(.education-timeline-item), aside, form, [class*="rounded-2xl"]'
     )
+  }
+
+  const activateSpotlight = (card) => {
+    if (!card) return
+
+    // Every supported card receives the same
+    // background spotlight and interactive border glow.
+    card.classList.add('spotlight-target')
+
+    card.style.setProperty('--spotlight-opacity', '1')
   }
 
   const updateSpotlightPosition = (event) => {
@@ -287,15 +352,7 @@ function App() {
       `${event.clientY - rect.top}px`
     )
 
-    const hasExistingSpotlight =
-      card.classList.contains('skills-card') ||
-      card.closest('#projets, #projects')
-
-    if (!hasExistingSpotlight) {
-      card.classList.add('spotlight-target')
-    }
-
-    card.style.setProperty('--spotlight-opacity', '1')
+    activateSpotlight(card)
   }
 
   const handleSpotlightEnter = (event) => {
@@ -305,15 +362,7 @@ function App() {
 
     if (!card || !event.currentTarget.contains(card)) return
 
-    const hasExistingSpotlight =
-      card.classList.contains('skills-card') ||
-      card.closest('#projets, #projects')
-
-    if (!hasExistingSpotlight) {
-      card.classList.add('spotlight-target')
-    }
-
-    card.style.setProperty('--spotlight-opacity', '1')
+    activateSpotlight(card)
   }
 
   const handleSpotlightLeave = (event) => {
@@ -363,15 +412,7 @@ function App() {
       `${event.clientY - rect.top}px`
     )
 
-    const hasExistingSpotlight =
-      card.classList.contains('skills-card') ||
-      card.closest('#projets, #projects')
-
-    if (!hasExistingSpotlight) {
-      card.classList.add('spotlight-target')
-    }
-
-    card.style.setProperty('--spotlight-opacity', '1')
+    activateSpotlight(card)
   }
 
   const handleTouchSpotlightEnd = (event) => {
@@ -416,7 +457,7 @@ function App() {
           language={language}
           setLanguage={setLanguage}
           theme={theme}
-          setTheme={setTheme}
+          setTheme={handleThemeChange}
         />
 
         <main>
